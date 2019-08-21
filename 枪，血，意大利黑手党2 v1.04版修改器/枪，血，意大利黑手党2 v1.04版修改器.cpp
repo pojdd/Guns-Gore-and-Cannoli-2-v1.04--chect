@@ -175,7 +175,7 @@ BOOL isUp(int a) {
 	return (GetAsyncKeyState(a) & 0xffff) && (GetAsyncKeyState(VK_CONTROL) & 0xffff);
 }
 bool ActiveCode(ChectCode * obj) {
-	DWORD dwSize;
+	SIZE_T dwSize;
 	if (!gameisStart) {
 		obj->address = 0;//地址缓存过期
 		obj->isActive = 0;//游戏关闭所以激活取消
@@ -405,7 +405,8 @@ int qtest(char *p, char *temp, int dlen, int len, int offsetStep) {
 }
 DWORD findAddress(HANDLE hProcess, char *ipcode, int len ,DWORD start, DWORD end,int offsetStep) {
 	const unsigned cacheLen = 0x40000; //申请80KB的搜索缓存
-	DWORD baseAddress = start, dwSize;
+	DWORD baseAddress = start;
+	SIZE_T dwSize;
 	char temp[cacheLen];
 	while (true)
 	{
